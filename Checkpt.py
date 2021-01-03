@@ -20,7 +20,7 @@ class Checkpt:
         self.MOcoeff = np.array([])
         self.densityMatrix = np.array([])
         self.coreHam = np.array([])
-        pass
+        self.basis = ''
 
     def read_real(self, lines, i, perline=5):
         split = lines[i].split()
@@ -48,6 +48,8 @@ class Checkpt:
             for i in range(len(lines)):
                 line = lines[i]
                 split = line.split()
+                if i == 1 and len(split) >= 3:
+                    self.basis = split[2]
                 if "Number of atoms" in line:
                     self.n_atoms = int(split[-1])
                 elif "Charge" in line:
